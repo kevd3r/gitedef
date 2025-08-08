@@ -47,3 +47,8 @@ next-env.d.ts
 # on ignore aussi toutes les variables d'environnement
 .env
 .env.local
+
+# on va ignorer le simages aussi 
+*.jpeg
+.jpg
+.
