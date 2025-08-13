@@ -1,0 +1,45 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Admin {
+  id       String @id @default(uuid())
+  email    String @unique
+  password String
+}
+
+model Reservation {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String
+  phone     String?
+  startDate DateTime
+  endDate   DateTime
+  message   String?
+  origin    Origin   @default(PRIVATE)
+  status    Status   @default(PENDING) // Statut par défaut
+  createdAt DateTime @default(now())
+}
+
+enum Origin {
+  AIRBNB
+  PRIVATE
+}
+
+enum Status {
+  PENDING
+  VALIDATED
+  CANCELED
+}
