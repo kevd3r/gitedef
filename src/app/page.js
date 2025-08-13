@@ -1,11 +1,13 @@
+'use client';
 import Image from "next/image";
 import Link from "next/link";
 import Header from "./components/Header"; // Assurez-vous que le chemin d'importation est correct
 import Card from "./components/Card";
-import Footer from "./components/Footer";
 import LocationMap from "./lib/LocationMap";
 
+
 export default function Home() {
+
   const cards = [
     {
       title: "Hébergement",
@@ -29,7 +31,9 @@ export default function Home() {
     },
   ];
 
+
   return (
+    
     // Conteneur principal de la page.
 
     <div className="min-h-screen flex flex-col font-[family-name:var(--font-geist-sans)]">
@@ -94,7 +98,7 @@ export default function Home() {
           faut. Plongez dans un monde de tranquillité et de confort.
         </p>
       </div>
-      {/* Ajoutez d'autres sections de contenu ici (cards, formulaires, etc.) */}
+   
       <div className="flex flex-col items-center md:grid md:grid-cols-2 lg:grid-cols-4 md:flex-row md:justify-center md:space-x-6 gap-6 p-10">
         {cards.map((card) => (
           <Card
@@ -106,7 +110,6 @@ export default function Home() {
         ))}
       </div>
       <LocationMap></LocationMap>
-
     </div>
   );
 }
