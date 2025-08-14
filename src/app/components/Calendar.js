@@ -1,9 +1,11 @@
-// app/reservations/page.js
+// app/components/Calendar.js
 "use client";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useState } from "react";
+import { isSameDay, startOfDay, getDay } from "date-fns";
 
-const Calendar = () => {
+const Calendar = ({ validatedReservations = [] }) => {
+  // ... Le reste du code est inchangé
   const days = [
     "lundi",
     "mardi",
@@ -27,6 +29,7 @@ const Calendar = () => {
     "août",
     "septembre",
     "octobre",
+    "novembre",
     "décembre",
   ];
   const [currentDate, setCurrentDate] = useState(new Date());
@@ -59,46 +62,37 @@ const Calendar = () => {
   const gotoToday = () => {
     const newDate = new Date();
     setCurrentDate(newDate);
-    setViewMode("month"); // Revenir à la vue mois par défaut pour "Aujourd'hui"
+    setViewMode("month");
   };
 
   // --- Fonctions de génération des jours ---
-
-  // Fonction pour générer toutes les cases du calendrier mensuel (42 cases = 7x6)
   const generateMonthlyCalendarDays = () => {
     const year = currentDate.getFullYear();
     const month = currentDate.getMonth();
     const firstDayOfMonth = new Date(year, month, 1);
-    // getDay() retourne 0 pour Dimanche, 1 pour Lundi...
-    // On ajuste pour que Lundi soit le premier jour (0)
-    const startingDayOfWeek = (firstDayOfMonth.getDay() + 6) % 7; // 0=Lun, 1=Mar, ..., 6=Dim
-
+    const startingDayOfWeek = (firstDayOfMonth.getDay() + 6) % 7;
     const daysInMonth = new Date(year, month + 1, 0).getDate();
-
     const calendarDays = [];
 
     for (let i = 0; i < 42; i++) {
       if (i < startingDayOfWeek) {
-        calendarDays.push(null); // Cases vides avant le début du mois
+        calendarDays.push(null);
       } else if (i < startingDayOfWeek + daysInMonth) {
-        calendarDays.push(i - startingDayOfWeek + 1); // Jours du mois actuel
+        const dayNumber = i - startingDayOfWeek + 1;
+        const dayDate = new Date(year, month, dayNumber);
+        calendarDays.push(dayDate);
       } else {
-        calendarDays.push(null); // Cases vides après la fin du mois
+        calendarDays.push(null);
       }
     }
     return calendarDays;
   };
 
-  // Fonction pour générer les jours de la semaine actuelle
   const generateWeeklyCalendarDays = () => {
-    const year = currentDate.getFullYear();
-    const month = currentDate.getMonth();
-    const day = currentDate.getDate();
-
     const weekDays = [];
-    // Trouver le lundi de la semaine en cours
-    const currentDayOfWeek = (currentDate.getDay() + 6) % 7; // 0=Lun, 1=Mar, ..., 6=Dim
-    const mondayOfWeek = new Date(year, month, day - currentDayOfWeek);
+    const currentDayOfWeek = (currentDate.getDay() + 6) % 7; // Lundi = 0
+    const mondayOfWeek = new Date(currentDate);
+    mondayOfWeek.setDate(currentDate.getDate() - currentDayOfWeek);
 
     for (let i = 0; i < 7; i++) {
       const dayDate = new Date(mondayOfWeek);
@@ -108,29 +102,81 @@ const Calendar = () => {
     return weekDays;
   };
 
-  // Fonction pour vérifier si c'est aujourd'hui
-  const isToday = (dayNumber, checkDate = currentDate) => {
-    if (dayNumber === null) return false;
+  const isToday = (dateObj) => {
+    if (!dateObj) return false;
+    return isSameDay(dateObj, new Date());
+  };
 
-    const today = new Date();
-    const currentYear = checkDate.getFullYear();
-    const currentMonth = checkDate.getMonth();
+  // --- Nouvelle fonction pour vérifier les réservations ---
+  const getReservationsForDay = (dateObj) => {
+    if (!dateObj) return [];
+    return validatedReservations.filter((res) => {
+      const startDate = startOfDay(new Date(res.startDate));
+      const endDate = startOfDay(new Date(res.endDate));
+      const currentDay = startOfDay(dateObj);
+      return currentDay >= startDate && currentDay <= endDate;
+    });
+  };
+
+  const getReservationGels = (dateObj) => {
+    if (!dateObj) return null;
+    const reservations = getReservationsForDay(dateObj);
+
+    if (reservations.length === 0) {
+      return null;
+    }
 
     return (
-      today.getDate() === dayNumber &&
-      today.getMonth() === currentMonth &&
-      today.getFullYear() === currentYear
+      <div className="mt-1 space-y-1 w-full">
+        {reservations.map((res, index) => {
+          const startDate = startOfDay(new Date(res.startDate));
+          const endDate = startOfDay(new Date(res.endDate));
+          const currentDay = startOfDay(dateObj);
+
+          let gelClasses =
+            "relative px-2 py-0.5 text-white text-xs whitespace-nowrap overflow-hidden text-ellipsis";
+
+          // C'est le jour de l'arrivée (à partir de 16h)
+          const isArrivalDay = isSameDay(currentDay, startDate);
+          // C'est le jour du départ (avant 12h)
+          const isDepartureDay = isSameDay(currentDay, endDate);
+          // C'est un jour entre l'arrivée et le départ
+          const isMiddleDay = currentDay > startDate && currentDay < endDate;
+
+          if (isArrivalDay && isDepartureDay) {
+            // Réservation sur une seule journée
+            gelClasses += " bg-red-400 rounded-full";
+          } else if (isArrivalDay) {
+            // Début de la réservation
+            gelClasses +=
+              " bg-red-400 rounded-l-full pr-1 right-0 left-1/2 w-1/2";
+          } else if (isDepartureDay) {
+            // Fin de la réservation
+            gelClasses +=
+              " bg-red-400 rounded-r-full pl-1 right-1/2 w-1/2 left-0";
+          } else if (isMiddleDay) {
+            // Milieu de la réservation
+            gelClasses += " bg-red-400 rounded-none";
+          }
+
+          return (
+            <div key={res.id + "-" + index} className={gelClasses}>
+              Réservé
+            </div>
+          );
+        })}
+      </div>
     );
   };
 
   // --- Rendu du composant ---
   return (
     <>
-      <span className="text-[#FECD31] text-center text-xl block mb-4">
-        {days[currentDate.getDay() === 0 ? 6 : currentDate.getDay() - 1]}{" "}
-        {currentDate.getDate()} {months[currentDate.getMonth()]}{" "}
-        {currentDate.getFullYear()}
-      </span>
+      <div>
+        <h1 className="text-5xl font-bold mb-6 text-[#FECD31] text-center">
+          Calendrier
+        </h1>
+      </div>
 
       <div className="min-h-screen bg-[#0C1824] text-white pt-10 pb-10 container mx-auto md:px-8 max-w-7xl rounded-2xl ">
         <div className="bg-[#14273A] p-8 rounded-lg shadow-lg mb-16">
@@ -218,21 +264,26 @@ const Calendar = () => {
 
           {viewMode === "month" ? (
             <div className="grid grid-cols-7 gap-1">
-              {generateMonthlyCalendarDays().map((day, index) => (
+              {generateMonthlyCalendarDays().map((dayDate, index) => (
                 <div
                   key={index}
                   className={`
-                    text-center p-3 rounded-lg h-20 flex items-center justify-center
+                    text-center p-3 rounded-lg min-h-[120px] h-auto flex flex-col items-center justify-start
                     ${
-                      day !== null
-                        ? isToday(day)
+                      dayDate
+                        ? isToday(dayDate)
                           ? "bg-[#FECD31] text-[#0C1824] font-bold shadow-lg cursor-pointer hover:text-[#FECD31] hover:bg-[#0C1824]"
                           : "bg-[#0C1824] text-white hover:bg-[#1a2832] cursor-pointer"
                         : "bg-transparent"
                     }
                   `}
                 >
-                  {day}
+                  {dayDate && (
+                    <>
+                      <span>{dayDate.getDate()}</span>
+                      {getReservationGels(dayDate)}
+                    </>
+                  )}
                 </div>
               ))}
             </div>
@@ -242,9 +293,9 @@ const Calendar = () => {
                 <div
                   key={index}
                   className={`
-                    text-center p-3 rounded-lg h-50 flex flex-col items-center justify-center
+                    text-center p-3 rounded-lg min-h-[120px] h-auto flex flex-col items-center justify-start
                     ${
-                      isToday(dateObj.getDate(), dateObj)
+                      isToday(dateObj)
                         ? "bg-[#FECD31] text-[#0C1824] font-bold shadow-lg cursor-pointer hover:text-[#FECD31] hover:bg-[#0C1824]"
                         : "bg-[#0C1824] text-white hover:bg-[#1a2832] cursor-pointer"
                     }
@@ -256,6 +307,7 @@ const Calendar = () => {
                   <span className="text-xl font-semibold">
                     {dateObj.getDate()}
                   </span>
+                  {getReservationGels(dateObj)}
                 </div>
               ))}
             </div>
@@ -267,5 +319,3 @@ const Calendar = () => {
 };
 
 export default Calendar;
-
-//la calendrier mensuel fonctionne très bien on passe maintenant au calendrier hebdomadaire

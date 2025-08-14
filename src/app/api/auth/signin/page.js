@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import Head from "next/head"; // Note: Le composant Head de Next.js est obsolète dans l'App Router
+
 
 export default function SignIn() {
   const [email, setEmail] = useState("");
