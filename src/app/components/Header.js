@@ -25,7 +25,7 @@ const Header = () => {
     { title: "Réservations", url: "/booking" },
     { title: "Soins bien-être", url: "/wellness" },
     { title: "Contact", url: "/contact" },
-    { title: "Admin", url: "/admin" },
+
   ];
 
   const headerBgClass = currentPath === "/" ? "bg-transparent" : "bg-[#0C1824]";
@@ -57,6 +57,7 @@ const Header = () => {
       <button
         onClick={toggleMobileMenu}
         className="md:hidden z-50 text-gray-300"
+        aria-label="Toggle Mobile Menu"
       >
         {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
       </button>
@@ -68,7 +69,7 @@ const Header = () => {
         }`}
       >
          <div className="flex justify-end">
-          <button onClick={toggleMobileMenu} className="text-gray-300">
+          <button onClick={toggleMobileMenu} className="text-gray-300" aria-label="Close Mobile Menu">
             <X size={28} />
           </button>
         </div>

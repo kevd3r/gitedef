@@ -4,6 +4,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
+
 const Footer = () => {
   const menuLinks = [
     { title: "Accueil", href: "/" },
@@ -13,30 +14,7 @@ const Footer = () => {
     { title: "Contact", href: "/contact" },
   ];
 
-  const socialLinks = [
-    // Remplacé les chemins locaux d'icônes par des placeholders ou des icônes SVG/emoji si possible
-    {
-      name: "Facebook",
-      icon: "https://placehold.co/24x24/FFFFFF/000000?text=FB",
-      href: "#",
-      alt: "Icône Facebook",
-    },
-    {
-      name: "Instagram",
-      icon: "https://placehold.co/24x24/FFFFFF/000000?text=IG",
-      href: "#",
-      alt: "Icône Instagram",
-    },
-    {
-      name: "Twitter",
-      icon: "https://placehold.co/24x24/FFFFFF/000000?text=TW",
-      href: "#",
-      alt: "Icône Twitter",
-    },
-    // Si vous préférez des icônes SVG inline (sans besoin de fichiers externes):
-    // Exemple pour Facebook (vous pouvez trouver les chemins SVG en ligne pour d'autres)
-    // { name: "Facebook", icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm3 8h-2v4h2v2h-2v4h-3v-4H8V10h1.5l.5-2h2.5l.5 2H15z"/></svg>', href: "#", alt: "Icône Facebook" },
-  ];
+
 
   return (
     // Conteneur principal du pied de page.
@@ -59,7 +37,7 @@ const Footer = () => {
           />
         </Link>
         <p className="text-sm text-center md:text-left">
-          &copy; {new Date().getFullYear()} Votre Nom de Site. Tous droits
+          &copy; {new Date().getFullYear()} www.escapadeangoulins.fr. Tous droits
           réservés.
         </p>
       </div>
@@ -86,33 +64,22 @@ const Footer = () => {
       <div className="flex flex-col items-center md:items-start gap-4">
         <h3 className="text-xl font-semibold text-white mb-2">Contact</h3>
         <p className="text-center md:text-left">
-          123 Rue de l&apos;Exemple
+          28 Allée Adèle
           <br />
-          75000 Paris, France
+          17690 Angoulins, 
+     
           <br />
-          contact@votresite.com
+          <a
+                  href={`mailto:${process.env.EMAIL_USER}`}
+                  className="hover:underline"
+                >
+                  {process.env.EMAIL_USER}
+                </a>
+          
           <br />
-          +33 1 23 45 67 89
+          +33 6 88 64 81 95
         </p>
-        <div className="flex space-x-4 mt-4">
-          {socialLinks.map((social) => (
-            <a
-              key={social.name}
-              href={social.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:opacity-75 transition-opacity"
-            >
-              {/* Remplacé Image par <img> avec un placeholder */}
-              <img
-                src={social.icon}
-                alt={social.alt}
-                width={24} // Taille des icônes sociales
-                height={24}
-              />
-            </a>
-          ))}
-        </div>
+        
       </div>
     </footer>
   );

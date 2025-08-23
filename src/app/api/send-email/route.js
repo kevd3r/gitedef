@@ -6,7 +6,7 @@ export async function POST(request) {
     const { name, email, phone, message } = await request.json();
 
     const transporter = nodemailer.createTransport({
-      host: 'mail.espritweb.io',
+      host: process.env.EMAIL_HOST,
       port: 465,
       secure: true,
       auth: {
@@ -20,7 +20,7 @@ export async function POST(request) {
 
     const mailOptions = {
       from: process.env.EMAIL_USER,
-      to: 'kevin.derot@espritweb.io',
+      to: process.env.EMAIL_USER,
       subject: `Nouvelle demande de contact de ${name}`,
       html: `
         <h2>Nouvelle Demande de Contact</h2>

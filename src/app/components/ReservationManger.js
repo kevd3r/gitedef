@@ -97,7 +97,7 @@ const ReservationManager = ({ reservations, onReservationsChange }) => {
           Gestion des Réservations
         </h2>
         <Link href="/admin/reservations/create">
-          <button className="flex items-center px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors">
+          <button className="flex items-center px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors curosr-pointer">
             <Plus className="w-5 h-5 mr-2" />
             Créer une réservation
           </button>
