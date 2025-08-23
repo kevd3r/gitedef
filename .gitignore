@@ -57,3 +57,7 @@ next-env.d.ts
 # on va ignorer les scripts aussi
 /scripts
 
+/.next
+.next
+npm-debug.log
+docker-compose.yml
