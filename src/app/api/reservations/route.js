@@ -6,7 +6,7 @@ const prisma = new PrismaClient();
 // Fonction pour gérer les requêtes GET (READ)
 export async function GET(request) {
   try {
-    const reservations = await prisma.reservation.findMany();
+    const reservations = await prisma.Reservation.findMany();
     return NextResponse.json(reservations);
   } catch (error) {
     return NextResponse.json({ error: 'Failed to fetch reservations' }, { status: 500 });
@@ -17,7 +17,7 @@ export async function GET(request) {
 export async function POST(request) {
   try {
     const data = await request.json();
-    const newReservation = await prisma.reservation.create({ data });
+    const newReservation = await prisma.Reservation.create({ data });
     return NextResponse.json(newReservation, { status: 201 });
   } catch (error) {
     return NextResponse.json({ error: 'Failed to create reservation' }, { status: 500 });
