@@ -37,7 +37,7 @@ export default function Home() {
     
     // Conteneur principal de la page.
 
-    <div className="min-h-screen flex flex-col font-[family-name:var(--font-geist-sans)]">
+    <div className="min-h-screen flex flex-col font-[family-name:var(--font-geist-sans)] bg-[#0C1824]">
       <div className="relative w-full h-screen overflow-hidden">
         <Image
           src="/images/homepage/carrelet_acc.jpg"
@@ -95,7 +95,7 @@ export default function Home() {
         </h2>
         <p className="text-lg text-center text-white max-w-2xl">
           Que vous recherchiez une escapade relaxante, une aventure en pleine
-          nature ou un séjour axé sur le bien-être, nous avons ce qu&pos;il vous
+          nature ou un séjour axé sur le bien-être, nous avons ce qu&apos;il vous
           faut. Plongez dans un monde de tranquillité et de confort.
         </p>
       </div>
