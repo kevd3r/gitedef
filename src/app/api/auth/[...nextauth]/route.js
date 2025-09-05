@@ -20,7 +20,7 @@ export const authOptions = {
             email: credentials.email,
           },
         });
-
+        console.log("Admin trouvé :", admin);
         if (admin) {
           const isPasswordValid = await bcrypt.compare(
             credentials.password,
@@ -33,6 +33,7 @@ export const authOptions = {
               email: admin.email,
             };
           }
+          console.log("Mot de passe valide :", isPasswordValid);
         }
         return null;
       },

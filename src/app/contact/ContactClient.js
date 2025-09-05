@@ -62,18 +62,7 @@ export default function ContactClient() {
                 )}
                 <span className="ml-2 text-sm">(Christophe)</span>
               </p>
-              <p className="flex items-start">
-                <MapPin className="inline-block mr-3 text-2xl text-blue-400 mt-1" />
-                <span>
-                  12 Rue des Carrelets,
-                  <br />
-                  17690 Angoulins,
-                  <br />
-                  <span className="text-sm">
-                    près de La Rochelle, Charente-Maritime
-                  </span>
-                </span>
-              </p>
+              
               <p className="flex items-start">
                 <Clock className="inline-block mr-3 text-2xl text-blue-400 mt-1" />
                 <span>
@@ -136,9 +125,7 @@ export default function ContactClient() {
                 Comment modifier ou annuler une réservation ?
               </summary>
               <p className="mt-2">
-                Contactez-nous par email ou téléphone au moins 48h avant votre
-                arrivée. Les annulations sont gratuites jusqu’à 7 jours avant le
-                séjour.
+                Contactez-nous par email ou téléphone et se référer aux conditions contractuelles.
               </p>
             </details>
             <details>
@@ -146,9 +133,7 @@ export default function ContactClient() {
                 Proposez-vous des soins bien-être pour les enfants ?
               </summary>
               <p className="mt-2">
-                Nos soins sont adaptés aux adultes, mais nous proposons des
-                activités relaxantes pour les familles (ex: balades en bord de
-                mer).
+                Nos soins sont adaptés aux adultes, et aux enfants accompagnés d&apos;un parent
               </p>
             </details>
           </div>

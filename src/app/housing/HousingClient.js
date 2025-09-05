@@ -51,7 +51,7 @@ export default function HousingClient() {
     { text: "Four à micro-ondes", icon: Microwave },
     { text: "Grille-pain", icon: Square },
     { text: "Serviettes de bain fournies", icon: ShowerHead },
-    { text: "Gel douche et shampoing bio", icon: Sprout },
+    { text: "Gel douche et shampoing", icon: Sprout },
     { text: "Sèche-cheveux", icon: Fan },
     { text: "Draps, oreillers et couverture inclus", icon: Bed },
     { text: "Espace de rangement pour vêtements", icon: Shirt },
@@ -62,12 +62,12 @@ export default function HousingClient() {
 
   const pricing = [
     {
-      season: "Basse Saison (1er février au 31 mars)",
+      season: "Basse Saison (1er février au 31 mars et du 1er Novembre au 31 Décembre)",
       price: "65 €/nuit",
       description: "Période idéale pour les escapades tranquilles.",
     },
     {
-      season: "Moyenne Saison (1er avril au 30 juin)",
+      season: "Moyenne Saison (1er avril au 30 juin et du 1er septembre au 31 octobre)",
       price: "75 €/nuit",
       description: "Profitez du printemps en bord de mer.",
     },
@@ -80,9 +80,9 @@ export default function HousingClient() {
   ];
 
   const nearbyActivities = [
-    { name: "Plage de la Conche des Baleines", distance: "1 km", icon: Waves },
-    { name: "Club de voile d'Angoulins", distance: "1,2 km", icon: Sailboat },
-    { name: "Sentier côtier GR360", distance: "800 m", icon: Sprout },
+    { name: "Plage de la Platère", distance: "2,5 km", icon: Waves },
+    { name: "Club de voile d'Angoulins", distance: "2,5 km", icon: Sailboat },
+    { name: "Vélodyssée", distance: "800 m", icon: Sprout },
     {
       name: "Commerces du village (boulangerie, épicerie)",
       distance: "500 m",
@@ -283,7 +283,7 @@ export default function HousingClient() {
                 Quels sont les horaires d&apos;arrivée et de départ ?
               </summary>
               <p className="mt-2">
-                Arrivée à partir de 16h, départ avant 12h. Nous pouvons être
+                Arrivée à partir de 16h, départ avant 11h. Nous pouvons être
                 flexibles selon les disponibilités.
               </p>
             </details>
@@ -301,8 +301,7 @@ export default function HousingClient() {
                 Y a-t-il des restaurants à proximité ?
               </summary>
               <p className="mt-2">
-                Plusieurs restaurants sont accessibles à moins de 2 km. Nous
-                recommandons &quot;Le Carrelet&quot; pour ses fruits de mer (1,5 km).
+                Plusieurs restaurants sont accessibles à moins de 2 km.
               </p>
             </details>
             <details className="p-4 border border-gray-600 rounded-lg bg-gray-800/30">
@@ -310,8 +309,7 @@ export default function HousingClient() {
                 Peut-on louer des vélos sur place ?
               </summary>
               <p className="mt-2">
-                Nous ne louons pas de vélos, mais le village d&apos;Angoulins propose
-                un service de location (500 m du gîte).
+                Nous ne louons pas de vélos, mais des services de location sont disponibles à proximité.
               </p>
             </details>
           </div>

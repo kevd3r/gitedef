@@ -17,7 +17,7 @@ const LocationMap = () => {
       </h2>
       <p className="text-lg text-center text-white max-w-2xl mb-8">
         Situés à Angoulins, village côtier idéalement localisé entre la ville
-        historique de La Rochelle et la station balnéaiire de
+        historique de La Rochelle et la station balnéaire de
         Chatelaillon-Plage, nous vous proposons un hébergement destiné à la
         location touristique ainsi que des soins de bien-être. Posez vos bagages
         en toute tranquilité le temps d&apos;une nuit ou plus, et profitez du charme

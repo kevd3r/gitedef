@@ -52,7 +52,7 @@ export default function BookingClient() {
               <li className="flex items-center text-blue-400 font-semibold">
                 <Clock className="inline-block mr-2 text-2xl" />
                 <strong>Arrivée à partir de 16h</strong>,{" "}
-                <strong>départ avant 12h</strong>.
+                <strong>départ avant 11h</strong>.
               </li>
               <li className="flex items-center text-blue-400 font-semibold">
                 <Info className="inline-block mr-2 text-2xl" />
@@ -110,14 +110,14 @@ export default function BookingClient() {
               <summary className="font-semibold cursor-pointer">
                 Quelles sont les horaires d’arrivée et de départ ?
               </summary>
-              <p className="mt-2">Arrivée à partir de 16h, départ avant 12h.</p>
+              <p className="mt-2">Arrivée à partir de 16h, départ avant 11h.</p>
             </details>
             <details>
               <summary className="font-semibold cursor-pointer">
                 Comment annuler ou modifier ma réservation ?
               </summary>
               <p className="mt-2">
-                Contactez-nous par email ou téléphone au moins 48h à l’avance.
+                Contactez-nous par email ou téléphone et se référer aux conditions contractuelles.
               </p>
             </details>
           </div>

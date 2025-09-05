@@ -87,7 +87,7 @@ export default function WellnessClient() {
     {
       question: "Comment se déroule une séance ?",
       answer:
-        "La séance se déroule habillé, allongé sur un futon au sol. Le praticien exerce des pressions avec les paumes, les pouces et parfois les coudes, le long des méridiens d'acupuncture.",
+        "La séance se déroule habillé, allongé sur une table de massage. Le praticien exerce des pressions avec les paumes, les pouces et parfois les coudes, le long des méridiens d'acupuncture.",
     },
     {
       question: "Faut-il prévoir quelque chose de particulier ?",
@@ -191,7 +191,7 @@ export default function WellnessClient() {
             Les Bienfaits du Shiatsu
           </h2>
           <p className="mb-6 text-lg">
-            Le Shiatsu offre de nombreux bienfaits pour le corps et l&aspo;esprit :
+            Le Shiatsu offre de nombreux bienfaits pour le corps et l&apos;esprit :
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             {benefits.map((benefit, index) => (
