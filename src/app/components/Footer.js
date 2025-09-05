@@ -64,11 +64,7 @@ const Footer = () => {
       <div className="flex flex-col items-center md:items-start gap-4">
         <h3 className="text-xl font-semibold text-white mb-2">Contact</h3>
         <p className="text-center md:text-left">
-          28 Allée Adèle
-          <br />
-          17690 Angoulins, 
-     
-          <br />
+          
           <a
                   href={`mailto:${process.env.EMAIL_USER}`}
                   className="hover:underline"
